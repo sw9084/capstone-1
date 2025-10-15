@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
- * Represent a single financial transcation
+ * Represent a single financial transaction
  * CSV format used by the app : YYYY-MM-dd|HH:mm:ss|description|vendor|amount
  * Example:
  * 2025-14-10|12:30:23|ergnomic office chair|Amazon|-169.99
@@ -14,7 +14,7 @@ import java.util.Objects;
 
 
 public class Transaction {
-    // fields for each transaction
+    // fields for each transaction/ configuration/formatter
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
@@ -46,7 +46,7 @@ public class Transaction {
         if (description == null || vendor == null) {
             throw new IllegalArgumentException("Description and Vendor must not be null");
         }
-        // protection don't allow the pipe character in description/vendor. avoid CSV parsing issues
+        // protection that don't allow the pipe character in description/vendor. avoid CSV parsing issues
         if (description.contains(DELIMITER_RAW) || vendor.contains(DELIMITER_RAW)) {
             throw new IllegalArgumentException("Description or Vendor  must not contain any characters the '|'");
         }
@@ -143,7 +143,7 @@ public class Transaction {
        System.out.println(this. toString());
     }
 
-    //equal, useful for collection and tests
+    //equal/ hashcode useful for collections and tests
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
