@@ -47,8 +47,6 @@ public class Ledger {
     }
 
 
-
-
     /**
      * display all transaction in ledger
      * @param transactions the list of transactions to display.
