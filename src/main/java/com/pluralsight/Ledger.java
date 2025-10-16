@@ -14,7 +14,7 @@ public class Ledger {
     private static final String FILE_PATH = "transactions.csv";
 
     /**
-     * loads all transaction from the csv file
+     * loads all transaction from the CSV file
      *
      * @return a list of transaction objects.
      */
@@ -33,35 +33,25 @@ public class Ledger {
     }
 
     /**
-     * saves a new transaction to the csv file
+     * saves a new transaction to the CSV file
      *
-     * @param transactions the transaction to save
+     * @param transaction the transaction to save
      */
-    public static void saveTransactions(Transaction transactions) {
-        try (BufferedReader writter = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            writer.write(transactions.toCSV());
+    public static void saveTransaction(Transaction transaction) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+            writer.write(transaction.toCSVLine());
             writer.newLine();
         } catch (IOException e) {
             System.out.println("Error saving transactions: " + e.getMessage());
         }
     }
 
-    /**
-     * display all transaction in the ledger
-     *
-     * @param transaction the transaction to save
-     */
-    public static void saveTransactions(Transaction transactions) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
-            writer.Writter(transaction.toCSV());
-            writer.newLine();
-        } catch (IOException e) {
-            System.out.println("Error saving transactions: " + e.getMessage());
-        }
-    }
+
+
+
     /**
      * display all transaction in ledger
-     * @param transaction the list of transactions to display.
+     * @param transactions the list of transactions to display.
      */
     public static void displayAll(List<Transaction> transactions) {
         System.out.println("\n===== ALL TRANSACTIONS ====");
@@ -72,20 +62,20 @@ public class Ledger {
     /**
      * Display only deposit transaction(List<Transaction (positive amount)
      */
-    public static void displayDeposits(List<Transaction> transaction) {
+    public static void displayDeposits(List<Transaction> transactions) {
         System.out.println("\n=====DEPOSITS ====");
-        for (Transaction t : transaction) {
+        for (Transaction t : transactions) {
             if (t.getAmount() > 0) {
                 System.out.println(t);
             }
         }
     }
     /**
-     * diplay only payment transaction (negative amounts).
+     * display only payment transactions (negative amounts).
      */
-    public static void displayPayments(List<Transaction> transaction) {
+    public static void displayPayments(List<Transaction> transactions) {
         System.out.println("\n=====PAYMENTS ====");
-        for (Transaction t : transaction) {
+        for (Transaction t : transactions) {
             if (t.getAmount() > 0) {
                 System.out.println(t);
             }
