@@ -55,7 +55,7 @@ public class Main {
      *
      */
     private static  void addTransaction(Scanner scanner, boolean isDeposit) {
-        try
+        try {
             System.out.print("Enter description:");
             String description = scanner.nextLine();
 
