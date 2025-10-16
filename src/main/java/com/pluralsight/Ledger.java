@@ -1,7 +1,6 @@
 package com.pluralsight;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 import java.io.*;
 
 /**
@@ -11,20 +10,42 @@ import java.io.*;
  */
 
 public class Ledger {
-    private static final String FILE_PATH = "transactions.csv";
+    private static final String FILE_PATH = "data/transactions.csv";
 
     /**
      * loads all transaction from the CSV file
-     *
+     * if the file does not exist, creat an empty file and return an empty list
+     * if a line is malformed, skip it and continue loading
      * @return a list of transaction objects.
      */
     public static List<Transaction> loadTransactions() {
         List<Transaction> transactions = new ArrayList<>();
+        File file = new File(FILE_PATH);
+
+        if (!file.exists()) {
+            try {
+                File parent = file.getParentFile();
+                if (parent != null && !parent.exists()) {
+                    parent.mkdirs();
+                }
+                boolean created = file.createNewFile();
+                if (!created) {
+                    System.out.println("Transaction file created at " + file.getAbsolutePath());
+                }
+            } catch (IOException e) {
+                System.out.println("Error creating transaction file" + file.getAbsolutePath());
+            }
+         return transactions; }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                if(!line.isBlank()) continue;
+                try {
                 transactions.add(Transaction.fromCSVLine(line));
+            } catch(IllegalArgumentException e) {
+                    System.out.println("skipping invalid transaction line: " + e.getMessage());
+                }
             }
         } catch (IOException e) {
             System.out.println("Error loading transactions: " + e.getMessage());
@@ -38,6 +59,22 @@ public class Ledger {
      * @param transaction the transaction to save
      */
     public static void saveTransaction(Transaction transaction) {
+        File file = new File(FILE_PATH);
+        try {
+            File parent = file.getParentFile();
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
+            if (file.exists()) {
+                boolean created = file.createNewFile();
+                if (!created) {
+                    System.out.println("Transactions file created at " + file.getAbsolutePath());
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving transaction file: " + e.getMessage());
+            return;
+        }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
             writer.write(transaction.toCSVLine());
             writer.newLine();

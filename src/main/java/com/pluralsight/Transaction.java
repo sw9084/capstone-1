@@ -86,7 +86,7 @@ public class Transaction {
     public String toCSVLine() {
             // format amount with two decimal (ensures consistent CSV)
         String amountStr = String.format("%.2f", amount);
-        return DATE_FORMAT.format(time) + DELIMITER_RAW
+        return DATE_FORMAT.format(date) + DELIMITER_RAW
                 + TIME_FORMAT.format(time) + DELIMITER_RAW
                 + description + DELIMITER_RAW
                 + vendor + DELIMITER_RAW
