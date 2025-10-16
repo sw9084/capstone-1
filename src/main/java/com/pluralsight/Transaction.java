@@ -17,8 +17,8 @@ import java.util.Objects;
 public class Transaction {
     // fields for each transaction/ configuration/formatter
 
-    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss");
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ISO_LOCAL_DATE;
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ISO_LOCAL_TIME;
     private static final String DELIMITER = "\\|";
     private static final String DELIMITER_RAW = "|";
 
