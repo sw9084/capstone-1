@@ -10,7 +10,7 @@ import java.util.Objects;
  * Represent a single financial transaction
  * CSV format used by the app : YYYY-MM-dd|HH:mm:ss|description|vendor|amount
  * Example:
- * 2025-14-10|12:30:23|ergnomic office chair|Amazon|-169.99
+ * 2025-14-10|12:30:23|ergonomic office chair|Amazon|-169.99
  */
 
 
