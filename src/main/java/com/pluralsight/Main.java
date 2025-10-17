@@ -30,7 +30,6 @@ public class Main {
             System.out.println("Choose an option: ");
 
             String choice = scanner.nextLine().trim();
-            List<Transaction> transactions = Ledger.loadTransactions();
 
             switch (choice) {
                    case "1":
@@ -40,6 +39,7 @@ public class Main {
                         addTransaction(scanner, false);
                         break;
                         case "3":
+                            List<Transaction> transactions = Ledger.loadTransactions();
                             showLedgerMenu(scanner,transactions);
                             break;
                             case "4":
@@ -72,7 +72,8 @@ public class Main {
                     LocalTime.now(),
                     description,
                     vendor,
-                    amount);
+                    amount
+            );
             Ledger.saveTransaction(newTranscation);
             System.out.println("Transaction saved successfully!");
     } catch (Exception e) {
